@@ -6,7 +6,7 @@
         <cfargument name="fieldPswd" type="any" default="#form.password#">
         <cfargument name="fieldCpswd" type="any" default="#form.cpassword#">
         <cfquery name="datacollection">
-            INSERT INTO registerdata VALUES(<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldFname#">,
+            INSERT INTO register VALUES(<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldFname#">,
                                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldMailid#">,
                                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldUname#">,
                                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldPswd#">,
@@ -20,7 +20,7 @@
         <cfif structKeyExists(form,'formsubmit')>
             <cfquery name="infoCheck">
                 SELECT Firstname
-                FROM registerdata
+                FROM register
                 WHERE Username = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldUname#">
                 AND Userpassword = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldPswd#">
             </cfquery>
@@ -34,7 +34,7 @@
             </cfif>
         </cfif>
     </cffunction>
-    <cffunction name="getCreateData" access="public">
+    <!--- <cffunction name="getCreateData" access="public">
         <cfargument name="fieldtitlename" type="any" default="#form.titlename#">
         <cfargument name="fieldfirstname" type="any" default="#form.firstname#">
         <cfargument name="fieldlastname" type="any" default="#form.lastname#">
@@ -57,8 +57,8 @@
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldphonename#">)
         </cfquery>
         <cflocation url="view.cfm">
-    </cffunction>
-    <cffunction name="selectData" access="public" returnType="query">
+    </cffunction> --->
+    <!--- <cffunction name="selectData" access="public" returnType="query">
         <cfquery name="datacollection">
             SELECT Personid,Title,Firstname,Lastname,Gender,Emailid,Phonenumber FROM createdata
         </cfquery>
@@ -70,7 +70,7 @@
 			WHERE Emailid=<cfqueryparam value="#url.emailid#" cfsqltype="cf_sql_varchar">
 		</cfquery>
 		<cflocation url="..\view.cfm">
-	</cffunction>
+	</cffunction> --->
     <cffunction name="logout" access="public">
         <cfset structClear(session)>
         <cflocation url="login.cfm" addtoken="no">

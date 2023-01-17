@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div id="print">
-                            <cfinvoke component="components/component" method="selectData" returnVariable="datacollection">
+                            <!--- <cfinvoke component="components/artists" method="selectData" returnVariable="datacollection"> --->
                             <table class="bgwhite">
                                 <tr>
                                     <th class="padding10 tableborder"></th>
@@ -172,10 +172,10 @@
                                                         <input type="submit" name="editsubmit" id="editformsubmit" class="login padding10 margin10 cursorpointer bluecolor" value="EDIT">
                                                     </div>
                                                 </form>
-                                                <cfif structKeyExists(form,'editsubmit')>
+                                                <!--- <cfif structKeyExists(form,'editsubmit')>
                                                     <cfinvoke method="updateFunction" component="components/update">
                                                     <cflocation url="view.cfm" addtoken="no">
-                                                </cfif>
+                                                </cfif> --->
                                             </div>
                                             <div class="displayflex justifycenter align width200 margin10">
                                                 <img src="assets/account.png" class="userwidth">
@@ -205,7 +205,7 @@
                                                     Date of birth:<span id="viewdob" class="spancolor"></span>
                                                 </div>
                                                 <div class="name bluecolor margin10">
-                                                    Address:<span id="viewaddress" class="spancolor"></span>,
+                                                    Address:<span id="viewaddress" class="spancolor">,</span>
                                                             <span id="viewstreet" class="spancolor"></span>
                                                 </div>
                                                 <div class="name bluecolor margin10">
@@ -318,10 +318,10 @@
                                             <input type="submit" name="createsubmit" id="createformsubmit" class="login padding10 margin10 cursorpointer bluecolor" value="CREATE">
                                         </div>
                                     </form>
-                                    <cfif structKeyExists(form,'createsubmit')>
+                                    <!--- <cfif structKeyExists(form,'createsubmit')>
                                         <cfinvoke method="getCreateData" component="components/component">
                                         <cfset structClear(form)>
-                                    </cfif>
+                                    </cfif> --->
                                 </div>
                                 <div class="displayflex justifycenter align width200 margin10">
                                     <img src="assets/account.png" class="userwidth">
