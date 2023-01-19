@@ -210,3 +210,6 @@ a{
 .viewwidth{
     width: 500px;
 }
+.displaynone{
+    display: none;
+}

@@ -5,7 +5,8 @@
         </head>
         <body>
             <cfoutput>
-                <cfinvoke component="components/component" method="selectData" returnVariable="datacollection">
+                <cfset ORMReload()>
+                <cfset datastore=EntityLoad("Contacts")>
                 <table class="border1">
                     <tr>
                         <th class="border1 padding10">ICON</th>
@@ -13,19 +14,19 @@
                         <th class="border1 padding10">EMAIL ID</th>
                         <th class="border1 padding10">PHONE NUMBER</th>
                     </tr>
-                    <cfloop query="datacollection">
+                    <cfloop index="datastore" array="#datastore#">
                         <tr>
                             <td class="border1 padding10">
-                                <cfset local.gender=datacollection.Gender>
+                                <cfset gender=datastore.getGender()>
                                 <cfif gender eq "Female">
                                     <img src="assets/female.png" class="icon53">
                                 <cfelse>
                                     <img src="assets/male.png" class="icon53">
                                 </cfif>
                             </td>
-                            <td class="border1 padding10">#datacollection.Title# #datacollection.Firstname# #datacollection.Lastname#</td>
-                            <td class="border1 padding10">#datacollection.Emailid#</td>
-                            <td class="border1 padding10">#datacollection.Phonenumber#</td>
+                            <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
+                            <td class="border1 padding10">#datastore.getEmailid()#</td>
+                            <td class="border1 padding10">#datastore.getPhonenumber()#</td>
                         </tr>
                     </cfloop>
                 </table>

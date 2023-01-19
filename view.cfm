@@ -3,11 +3,11 @@
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="assets/modal.css">
         <script defer src="js/script.js"></script>
-        
+        <script defer src="js/viewmodal.js"></script>
+        <script defer src="js/editmodal.js"></script>
         <script defer src="assets/jquery.js"></script>
         <script defer src="assets/jquery.min.js"></script>
         <script defer src="js/edit.js"></script>
-        
     </head>
     <body>
         <cfoutput>
@@ -46,9 +46,8 @@
                             </div>
                         </div>
                         <cfset ORMReload()>
-                        <cfdump var="#(EntityLoad("Contacts"))#">
-                        <cfset datastore=EntityLoad("Contacts")>  
-                        <div id="print">
+                        <cfset datastore=EntityLoad("Contacts")> 
+                        <div>
                             <table class="bgwhite">
                                 <tr>
                                     <th class="padding10 tableborder"></th>
@@ -60,34 +59,34 @@
                                     <th class="padding10 tableborder"></th>
                                 </tr>
                                 <cfloop index="datastore" array="#datastore#">
-                                    <cfset local.person=datastore.getGender>
+                                    <cfset local.value=datastore.getPersonid()>
                                     <tr>
                                         <td class="padding10 tableborder">
-                                            <cfset local.person=datastore.getGender>
+                                            <cfset local.person=datastore.getGender()>
                                             <cfif local.person eq "Female">
                                                 <img src="assets/female.png" class="icon53">
                                             <cfelse>
                                                 <img src="assets/male.png" class="icon53">
                                             </cfif>
                                         </td>
-                                        <td class="padding10 tableborder">#datastore.getTitle# #datastore.getFirstname# #datastore.getLastname#</td>
-                                        <td class="padding10 tableborder">#datastore.getEmailid#</td>
-                                        <td class="padding10 tableborder">#datastore.getPhonenumber#</td>
-                                        <!--- <td class="padding10 tableborder">
+                                        <td class="padding10 tableborder">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
+                                        <td class="padding10 tableborder">#datastore.getEmailid()#</td>
+                                        <td class="padding10 tableborder">#datastore.getPhonenumber()#</td>
+                                        <td class="padding10 tableborder">
                                             <button type="submit" onclick="document.getElementById('id02').style.display='block';editPage('#local.value#')" class="viewbutton">EDIT</button>
                                         </td>
                                         <td class="padding10 tableborder">
                                             <button class="viewbutton">
-                                                <a class="delete" href="components/component.cfc?method=deletedata&emailid=#datastore.components.getEmailid#">DELETE</a>
+                                                <a class="delete" href="components/component.cfc?method=deletedata&personid=#datastore.getPersonid()#">DELETE</a>
                                             </button>
                                         </td>
                                         <td class="padding10 tableborder">
                                             <button type="submit" onclick="document.getElementById('id03').style.display='block';openPage('#local.value#')" class="viewbutton">VIEW</button>
-                                        </td> --->
+                                        </td>
                                     </tr>
                                 </cfloop>
                             </table>
-                            <!--- <div id="id02" class="w3-modal">
+                            <div id="id02" class="w3-modal">
                                 <div class="w3-modal-content">
                                     <div class="w3-container">
                                         <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
@@ -174,10 +173,10 @@
                                                         <input type="submit" name="editsubmit" id="editformsubmit" class="login padding10 margin10 cursorpointer bluecolor" value="EDIT">
                                                     </div>
                                                 </form>
-                                                <!--- <cfif structKeyExists(form,'editsubmit')>
+                                                <cfif structKeyExists(form,'editsubmit')>
                                                     <cfinvoke method="updateFunction" component="components/update">
                                                     <cflocation url="view.cfm" addtoken="no">
-                                                </cfif> --->
+                                                </cfif>
                                             </div>
                                             <div class="displayflex justifycenter align width200 margin10">
                                                 <img src="assets/account.png" class="userwidth">
@@ -229,7 +228,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --->
+                        </div>
                     </div>
                 </div>
                 <div id="id01" class="w3-modal">
@@ -331,6 +330,24 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="print" class="displaynone">
+                    <cfset ORMReload()>
+                    <cfset datastore=EntityLoad("Contacts")> 
+                    <table class="border1">
+                        <tr>
+                            <th class="border1 padding10">NAME</th>
+                            <th class="border1 padding10">EMAIL ID</th>
+                            <th class="border1 padding10">PHONE NUMBER</th>
+                        </tr>
+                        <cfloop index="datastore" array="#datastore#">
+                            <tr>
+                                <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
+                                <td class="border1 padding10">#datastore.getEmailid()#</td>
+                                <td class="border1 padding10">#datastore.getPhonenumber()#</td>
+                            </tr>
+                        </cfloop>
+                    </table>
                 </div>
             <cfelse>
                 <cflocation url="login.cfm" addtoken="no">

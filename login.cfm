@@ -5,7 +5,6 @@
         <script defer src="js/google.js"></script>
         <script defer src="js/facebook.js"></script>
         <script async defer src="assets/platform.js"></script>
-        <meta name="google-signin-client_id" content="769267328578-1m7tm8akljl1pp8ehct3bg431vhdbg81.apps.googleusercontent.com">
     </head>
     <body>
         <cfoutput>
@@ -38,13 +37,11 @@
                             <div class="textcenter">Or Sign in using</div>
                             <div class="displayflex justifycenter">
                                 <div class="displayflex">
-                                    <div class="margin10" id="fb-root">
-                                        <button onclick="FbApp_Login();" class="outlinenone bordernone bgwhite">
-                                            <img class="icon50 cursorpointer" src="assets/facebook.png" alt="Facebook Logo">
-                                        </button>
+                                    <div class="margin10">
+                                        <img class="icon50 cursorpointer" src="assets/facebook.png" alt="Facebook Logo">
                                     </div>
                                     <div class="margin10">
-                                        <img class="icon53 cursorpointer" data-onsuccess="onSignIn" src="assets/google.png" alt="Google Logo">
+                                        <img class="icon53 cursorpointer" src="assets/google.png" alt="Google Logo">
                                     </div>
                                 </div>
                             </div>

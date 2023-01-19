@@ -60,19 +60,13 @@
         </cfquery>
         <cflocation url="view.cfm">
     </cffunction>
-    <!--- <cffunction name="selectData" access="public" returnType="query">
-        <cfquery name="datacollection">
-            SELECT Personid,Title,Firstname,Lastname,Gender,Emailid,Phonenumber FROM createdata
-        </cfquery>
-        <cfreturn datacollection>
-    </cffunction>
     <cffunction name="deletedata" access="remote">
 		<cfquery name="delete">
-			DELETE FROM createdata
-			WHERE Emailid=<cfqueryparam value="#url.emailid#" cfsqltype="cf_sql_varchar">
+			DELETE FROM contacts
+			WHERE Personid=<cfqueryparam value="#url.personid#" cfsqltype="cf_sql_integer">
 		</cfquery>
-		<cflocation url="..\view.cfm">
-	</cffunction> --->
+		<cflocation url="../view.cfm">
+	</cffunction>
     <cffunction name="logout" access="public">
         <cfset structClear(session)>
         <cflocation url="login.cfm" addtoken="no">
