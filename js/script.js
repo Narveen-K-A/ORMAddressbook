@@ -106,33 +106,37 @@ function validatecreateform(){
     }
   }
   
-  function streetIdValidate(streetId){ 
-    if(streetId.value==""){
+  function streetIdValidate(streetId){
+    var letters = /^[A-Za-z]+$/;
+    if(streetId.value.match(letters)){
+      success('streetid_error');
+      return true;
+    }else{
       error('streetid_error');  
       return false;
-    }else{
-       success('streetid_error');
-       return true;
     }
   }
   
   function emailIdValidate(emailId){ 
-    if(emailId.value==""){
-      error('emailid_error');  
-      return false;
+    var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if(emailId.value.match(mailformat)){
+        success('emailid_error');
+        return true;
     }else{
-       success('emailid_error');
-       return true;
+        error('emailid_error');  
+        return false;
     }
   }
   
-  function phoneIdValidate(phoneId){ 
-    if(phoneId.value==""){
+  function phoneIdValidate(phoneId){
+    var phoneno = /^\d{10}$/; 
+    if(phoneId.value.match(phoneno)){
+      success('phoneid_error');
+      return true;
+    }
+    else{
       error('phoneid_error');  
       return false;
-    }else{
-       success('phoneid_error');
-       return true;
     }
   }
   

@@ -32,7 +32,8 @@
                             </div>
                             <cfif structKeyExists(form,'formsubmit')>
                                 <cfinvoke component="components/component" method="checkFordata" returnVariable="incorrectpass">
-                                <div class="displayflex justifycenter margin10"><small>#incorrectpass#</small></div>
+                                <div class="displayflex justifycenter margin10"><small class="red">#incorrectpass#</small></div>
+                                <cfset structClear(form)>
                             </cfif>
                             <div class="textcenter">Or Sign in using</div>
                             <div class="displayflex justifycenter">

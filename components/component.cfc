@@ -18,19 +18,26 @@
         <cfargument name="fieldPswd" default="#form.password#">
         <cfargument name="fieldUname" default="#form.username#">
         <cfif structKeyExists(form,'formsubmit')>
-            <cfquery name="infoCheck">
+            <cfquery name="usercheck">
                 SELECT Firstname
                 FROM register
                 WHERE Username = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldUname#">
-                AND Userpassword = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldPswd#">
             </cfquery>
-            <cfset session.userInfo=infoCheck.Firstname>
-            <cfif infoCheck.recordCount>
-                <cfset session.flag = 1>
-                <cflocation url="view.cfm" addtoken="no">
+            <cfquery name="passcheck">
+                SELECT Firstname
+                FROM register
+                WHERE Userpassword = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldPswd#">
+            </cfquery>
+            <cfif usercheck.recordCount>
+                <cfif passcheck.recordCount>
+                    <cfset session.userInfo=usercheck.Firstname>
+                    <cfset session.flag = 1>
+                    <cflocation url="view.cfm" addtoken="no">
+                <cfelse>
+                    <cfreturn "Please enter a valid password!">
+                </cfif>
             <cfelse>
-                <cflocation url="login.cfm" addtoken="no">
-                <cfreturn "Please enter a valid password!">
+                <cfreturn "Please enter a valid username!">   
             </cfif>
         </cfif>
     </cffunction>
@@ -45,6 +52,10 @@
         <cfargument name="fieldstreetname" type="any" default="#form.streetname#">
         <cfargument name="fieldemailname" type="any" default="#form.emailname#">
         <cfargument name="fieldphonename" type="any" default="#form.phonename#">
+        <cfif len(trim(form.filename))>
+            <cffile action="upload" fileField="filename" nameConflict="overwrite" accept="image/jpg,image/jpeg,image/gif,image/png" result="photoResult" destination="#expandpath("./assets/duplicate/")#">
+        </cfif>
+        <cfset session.fieldphotoname = photoResult.serverFile>
         <cfquery name="addresscollection">
             INSERT INTO contacts(Title,Firstname,Lastname,Gender,Dateofbirth,Photo,Addressofuser,Street,Emailid,Phonenumber) 
             VALUES(<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldtitlename#">,
@@ -52,7 +63,7 @@
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldlastname#">,
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldgendername#">,
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fielddobname#">,
-                    <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldphotoname#">,
+                    <cfqueryparam cfsqltype="cf_sql_varchar" value="#session.fieldphotoname#">,
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldaddressname#">,
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldstreetname#">,
                     <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.fieldemailname#">,

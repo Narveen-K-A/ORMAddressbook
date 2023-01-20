@@ -9,7 +9,7 @@
                 <cfset datastore=EntityLoad("Contacts")>
                 <table class="border1">
                     <tr>
-                        <th class="border1 padding10">ICON</th>
+                        <th class="border1 padding10">PHOTO</th>
                         <th class="border1 padding10">NAME</th>
                         <th class="border1 padding10">EMAIL ID</th>
                         <th class="border1 padding10">PHONE NUMBER</th>
@@ -17,12 +17,8 @@
                     <cfloop index="datastore" array="#datastore#">
                         <tr>
                             <td class="border1 padding10">
-                                <cfset gender=datastore.getGender()>
-                                <cfif gender eq "Female">
-                                    <img src="assets/female.png" class="icon53">
-                                <cfelse>
-                                    <img src="assets/male.png" class="icon53">
-                                </cfif>
+                                <cfset local.photo=datastore.getPhoto()>
+                                <img src="assets/duplicate/#local.photo#" class="icon50">
                             </td>
                             <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                             <td class="border1 padding10">#datastore.getEmailid()#</td>

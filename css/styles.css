@@ -140,7 +140,9 @@ a{
 #editAddress_error,
 #editStreet_error,
 #editEmail_error,
-#editPhone_error{
+#editPhone_error,
+#digitval_error,
+#char_error{
     color: red;
     visibility:hidden;      
 }
@@ -212,4 +214,7 @@ a{
 }
 .displaynone{
     display: none;
+}
+.red{
+    color: #ff0000;
 }

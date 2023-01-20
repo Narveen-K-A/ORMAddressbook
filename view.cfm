@@ -62,12 +62,8 @@
                                     <cfset local.value=datastore.getPersonid()>
                                     <tr>
                                         <td class="padding10 tableborder">
-                                            <cfset local.person=datastore.getGender()>
-                                            <cfif local.person eq "Female">
-                                                <img src="assets/female.png" class="icon53">
-                                            <cfelse>
-                                                <img src="assets/male.png" class="icon53">
-                                            </cfif>
+                                            <cfset local.photo=datastore.getPhoto()>
+                                            <img src="assets/duplicate/#local.photo#" class="icon50">
                                         </td>
                                         <td class="padding10 tableborder">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                                         <td class="padding10 tableborder">#datastore.getEmailid()#</td>
@@ -241,7 +237,7 @@
                                         <div class="bluecolor padding10 largefont">CREATE CONTACT</div>
                                     </div>
                                     <div class="padding10 bluecolor blueborder">Personal Contact</div>
-                                    <form method="post" name="fromCreate" onsubmit="return validatecreateform()">
+                                    <form method="post" name="fromCreate" onsubmit="return validatecreateform()" enctype="multipart/form-data">
                                         <div class="displayflex justify">
                                             <div>
                                                 <div class="bluecolor padding10">Title</div>
@@ -297,19 +293,19 @@
                                             <div>
                                                 <div class="bluecolor padding10">Street*</div>   
                                                 <input type="text" name="streetname" id="streetid" placeholder="Your Street Name" class="outlinenone width200 borderbottom borderstyle" onblur="validatecreateform()"><br>
-                                                <small id="streetid_error">Please fill this field!</small>
+                                                <small id="streetid_error">Please enter a valid street name!</small>
                                             </div>
                                         </div>
                                         <div class="displayflex justify">
                                             <div>
                                                 <div class="bluecolor padding10">Email Id*</div>
                                                 <input type="text" name="emailname" id="emailid" placeholder="Your Email Address" class="outlinenone width200 borderbottom borderstyle" onblur="validatecreateform()"><br>
-                                                <small id="emailid_error">Please fill this field!</small>
+                                                <small id="emailid_error">Please enter a valid mail id!</small>
                                             </div>
                                             <div>
                                                 <div class="bluecolor padding10">Phone No*</div>   
                                                 <input type="text" name="phonename" id="phoneid" placeholder="Your Phone No" class="outlinenone width200 borderbottom borderstyle" onblur="validatecreateform()"><br>
-                                                <small id="phoneid_error">Please fill this field!</small>
+                                                <small id="phoneid_error">Please enter a valid phone number!</small><br>
                                             </div>
                                         </div>
                                         <div>
@@ -336,12 +332,17 @@
                     <cfset datastore=EntityLoad("Contacts")> 
                     <table class="border1">
                         <tr>
+                            <th class="border1 padding10">PHOTO</th>
                             <th class="border1 padding10">NAME</th>
                             <th class="border1 padding10">EMAIL ID</th>
                             <th class="border1 padding10">PHONE NUMBER</th>
                         </tr>
                         <cfloop index="datastore" array="#datastore#">
                             <tr>
+                                <td class="border1 padding10">
+                                    <cfset local.photo=datastore.getPhoto()>
+                                    <img src="assets/duplicate/#local.photo#" class="icon50">
+                                </td>
                                 <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                                 <td class="border1 padding10">#datastore.getEmailid()#</td>
                                 <td class="border1 padding10">#datastore.getPhonenumber()#</td>
