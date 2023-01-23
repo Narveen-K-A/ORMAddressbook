@@ -18,6 +18,11 @@ function openPage(values){
             $('#viewstreet').html(obj.STREET);
             $('#viewmail').html(obj.EMAILID);
             $('#viewphone').html(obj.PHONENUMBER);
+            var location = document.getElementById("icondiv");
+            var viewimage = document.createElement("img");
+            viewimage.src = "assets/duplicate/"+obj.PHOTO;
+            viewimage.className="photofile";
+            location.append(viewimage);
         }
     }) 
 }

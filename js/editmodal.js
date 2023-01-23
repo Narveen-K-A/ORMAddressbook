@@ -19,6 +19,11 @@ function editPage(value){
             $('#editStreet').val(obj.STREET);
             $('#editEmail').val(obj.EMAILID);
             $('#editPhone').val(obj.PHONENUMBER);
+            var location = document.getElementById("editphoto");
+            var viewimage = document.createElement("img");
+            viewimage.src = "assets/duplicate/"+obj.PHOTO;
+            viewimage.className="photofile";
+            location.append(viewimage);
         }
     }) 
 }

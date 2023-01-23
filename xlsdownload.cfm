@@ -6,8 +6,7 @@
     </head>
     <body>
         <cfoutput>
-            <cfset ORMReload()>
-            <cfset datastore=EntityLoad("Contacts")>
+            <cfinvoke method="orminvoke" component="components/component" returnVariable="datastore">
             <table class="border1">
                 <tr>
                     <th class="border1 padding10">NAME</th>

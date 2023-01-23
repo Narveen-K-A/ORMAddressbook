@@ -23,5 +23,14 @@
                 Phonenumber = <cfqueryparam value="#arguments.formphonename#" cfsqltype="cf_sql_varchar">
             WHERE Personid = <cfqueryparam value="#arguments.formhideName#" cfsqltype="cf_sql_integer">
         </cfquery>
+        <cfif len(trim(form.editFileName))>
+            <cffile action="upload" fileField="editFileName" nameConflict="overwrite" accept="image/jpg,image/jpeg,image/gif,image/png" result="fileResult" destination="#expandpath("./assets/duplicate/")#">
+            <cfset session.photoreupload = fileResult.serverFile>
+            <cfquery name="editimage">
+                UPDATE contacts 
+                SET Photo = <cfqueryparam value="#session.photoreupload#" cfsqltype="cf_sql_varchar">
+                WHERE Personid = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.formhideName#">
+            </cfquery>
+        </cfif>
     </cffunction>
 </cfcomponent>

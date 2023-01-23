@@ -2,8 +2,6 @@
     <head>
         <link rel="stylesheet" href="css/styles.css">
         <script defer src="js/login.js"></script>
-        <script defer src="js/google.js"></script>
-        <script defer src="js/facebook.js"></script>
         <script async defer src="assets/platform.js"></script>
     </head>
     <body>

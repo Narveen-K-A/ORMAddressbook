@@ -4,6 +4,7 @@ function validateEditForm(){
     var editLnamevar = document.getElementById('editLname');
     var editGendervar = document.getElementById('editGender');
     var editDobvar = document.getElementById('editDob');
+    /* var editFilevar = document.getElementById('editFile'); */
     var editAddressvar = document.getElementById('editAddress');
     var editStreetvar = document.getElementById('editStreet');
     var editEmailvar = document.getElementById('editEmail');
@@ -14,13 +15,14 @@ function validateEditForm(){
     var validateeditLnamevar = editLnamevarValidate(editLnamevar);
     var validateeditGendervar = editGendervarValidate(editGendervar);
     var validateeditDobvar = editDobvarValidate(editDobvar);
+    /* var validateeditFilevar = editFilevarValidate(editFilevar); */
     var validateeditAddressvar = editAddressvarValidate(editAddressvar);
     var validateeditStreetvar = editStreetvarValidate(editStreetvar);
     var validateeditEmailvar = editEmailvarValidate(editEmailvar);
     var validateeditPhonevar = editPhonevarValidate(editPhonevar); 
   
   
-    if(validateeditTitlevar && validateeditFnamevar && validateeditLnamevar && validateeditGendervar && validateeditDobvar && validateeditAddressvar && validateeditStreetvar && validateeditEmailvar && validateeditPhonevar)
+    if(validateeditTitlevar && validateeditFnamevar && validateeditLnamevar && validateeditGendervar && validateeditDobvar /* && validateeditFilevar */ && validateeditAddressvar && validateeditStreetvar && validateeditEmailvar && validateeditPhonevar)
         return true;
     else 
         return false;
@@ -83,6 +85,16 @@ function editDobvarValidate(editDobvar){
         return true;
     }
 }
+
+/* function editFilevarValidate(editFilevar){ 
+    if(editFilevar.value==""){
+      error('editFile_error');  
+      return false;
+    }else{
+       success('editFile_error');
+       return true;
+    }
+  } */
   
 function editAddressvarValidate(editAddressvar){ 
     if(editAddressvar.value==""){
@@ -94,32 +106,35 @@ function editAddressvarValidate(editAddressvar){
     }
 }
   
-function editStreetvarValidate(editStreetvar){ 
-    if(editStreetvar.value==""){
-        error('editStreet_error');  
-        return false;
-    }else{
+function editStreetvarValidate(editStreetvar){
+    var streetval = /^[A-Za-z]+$/;
+    if(editStreetvar.value.match(streetval)){
         success('editStreet_error');
         return true;
+    }else{
+        error('editStreet_error');  
+        return false;
     }
 }
   
-function editEmailvarValidate(editEmailvar){ 
-    if(editEmailvar.value==""){
-        error('editEmail_error');  
-        return false;
-    }else{
+function editEmailvarValidate(editEmailvar){
+    var mailval = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if(editEmailvar.value.match(mailval)){
         success('editEmail_error');
         return true;
+    }else{
+        error('editEmail_error');  
+        return false;
     }
 }
   
-function editPhonevarValidate(editPhonevar){ 
-    if(editPhonevar.value==""){
-        error('editPhone_error');  
-        return false;
-    }else{
+function editPhonevarValidate(editPhonevar){
+    var phoneval = /^\d{10}$/; 
+    if(editPhonevar.value.match(phoneval)){
         success('editPhone_error');
         return true;
+    }else{
+        error('editPhone_error');  
+        return false;
     }   
 }

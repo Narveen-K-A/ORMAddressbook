@@ -140,9 +140,7 @@ a{
 #editAddress_error,
 #editStreet_error,
 #editEmail_error,
-#editPhone_error,
-#digitval_error,
-#char_error{
+#editPhone_error{
     color: red;
     visibility:hidden;      
 }
@@ -217,4 +215,17 @@ a{
 }
 .red{
     color: #ff0000;
+}
+.photofile{
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+}
+.tableicon{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+.marginright{
+    margin-right: 50px;
 }

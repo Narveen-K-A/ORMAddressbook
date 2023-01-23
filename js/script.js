@@ -112,7 +112,7 @@ function validatecreateform(){
       success('streetid_error');
       return true;
     }else{
-      error('streetid_error');  
+      error('streetid_error');
       return false;
     }
   }

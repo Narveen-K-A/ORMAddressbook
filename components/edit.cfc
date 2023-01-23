@@ -13,6 +13,7 @@
         <cfset local.setQuery.LASTNAME = editQuery.LASTNAME>
         <cfset local.setQuery.GENDER = editQuery.GENDER>
         <cfset local.setQuery.DATEOFBIRTH = editQuery.DATEOFBIRTH>
+        <cfset local.setQuery.PHOTO = editQuery.PHOTO>
         <cfset local.setQuery.ADDRESSOFUSER = editQuery.ADDRESSOFUSER>
         <cfset local.setQuery.STREET = editQuery.STREET>
         <cfset local.setQuery.EMAILID = editQuery.EMAILID>   

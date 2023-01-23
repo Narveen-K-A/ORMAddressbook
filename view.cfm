@@ -45,10 +45,9 @@
                                 <button onclick="document.getElementById('id01').style.display='block'" class="modalButton">CREATE CONTACT</button>
                             </div>
                         </div>
-                        <cfset ORMReload()>
-                        <cfset datastore=EntityLoad("Contacts")> 
+                        <cfinvoke method="orminvoke" component="components/component" returnVariable="datastore">
                         <div>
-                            <table class="bgwhite">
+                            <table class="bgwhite marginright">
                                 <tr>
                                     <th class="padding10 tableborder"></th>
                                     <th class="padding10 bluecolor tableborder">NAME</th>
@@ -63,7 +62,7 @@
                                     <tr>
                                         <td class="padding10 tableborder">
                                             <cfset local.photo=datastore.getPhoto()>
-                                            <img src="assets/duplicate/#local.photo#" class="icon50">
+                                            <img src="assets/duplicate/#local.photo#" class="tableicon">
                                         </td>
                                         <td class="padding10 tableborder">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                                         <td class="padding10 tableborder">#datastore.getEmailid()#</td>
@@ -85,14 +84,13 @@
                             <div id="id02" class="w3-modal">
                                 <div class="w3-modal-content">
                                     <div class="w3-container">
-                                        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <div class="displayflex lightbluebg">
                                             <div class="padding10 margin10 bgwhite">
                                                 <div class="lightbluebg displayflex justifycenter">
                                                     <div class="bluecolor padding10 largefont">EDIT CONTACT</div>
                                                 </div>
                                                 <div class="padding10 bluecolor blueborder">Personal Contact</div>
-                                                <form method="post" name="fromCreate" onsubmit="return validateEditForm()">
+                                                <form method="post" name="fromCreate" onsubmit="return validateEditForm()" enctype="multipart/form-data">
                                                     <div class="displayflex justify">
                                                         <div>
                                                             <div class="bluecolor padding10">Title</div>
@@ -135,6 +133,7 @@
                                                         <div>
                                                             <div class="bluecolor padding10">Upload Photo*</div>
                                                             <input type="file" name="editFileName" id="editFile" class="outlinenone width200"><br>
+                                                            <small id="editFile_error">Please upload a photo!</small>
                                                         </div>
                                                     </div>
                                                     <div class="padding10 bluecolor blueborder">Contact Details</div>
@@ -142,31 +141,31 @@
                                                         <div>
                                                             <div class="bluecolor padding10">Address*</div>
                                                             <input type="text" name="editAddressName" id="editAddress" placeholder="Your Address" class="outlinenone width200 borderbottom borderstyle" value=""><br>
-                                                            <small id="editAddress_error">Please fill this field!</small>
+                                                            <small id="editAddress_error">Please enter a valid address!</small>
                                                         </div>
                                                         <div>
                                                             <div class="bluecolor padding10">Street*</div>   
                                                             <input type="text" name="editStreetName" id="editStreet" placeholder="Your Street Name" class="outlinenone width200 borderbottom borderstyle" value=""><br>
-                                                            <small id="editStreet_error">Please fill this field!</small>
+                                                            <small id="editStreet_error">Please enter a valid street name!</small>
                                                         </div>
                                                     </div>
                                                     <div class="displayflex justify">
                                                         <div>
                                                             <div class="bluecolor padding10">Email Id*</div>
                                                             <input type="text" name="editEmailName" id="editEmail" placeholder="Your Email Address" class="outlinenone width200 borderbottom borderstyle" value=""><br>
-                                                            <small id="editEmail_error">Please fill this field!</small>
+                                                            <small id="editEmail_error">Please enter a valid mail id!</small>
                                                         </div>
                                                         <div>
                                                             <div class="bluecolor padding10">Phone No*</div>   
                                                             <input type="text" name="editPhoneName" id="editPhone" placeholder="Your Phone No" class="outlinenone width200 borderbottom borderstyle" value=""><br>
-                                                            <small id="editPhone_error">Please fill this field!</small>
+                                                            <small id="editPhone_error">Please enter a valid phone number!</small>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <input type="hidden" id="edithide" name="edithideName" value="">
                                                     </div>
                                                     <div class="displayflex justifycenter">
-                                                        <input type="submit" name="editsubmit" id="editformsubmit" class="login padding10 margin10 cursorpointer bluecolor" value="EDIT">
+                                                        <input type="submit" name="editsubmit" id="editformsubmit" class="login padding10 margin10 cursorpointer bluecolor" value="SAVE">
                                                     </div>
                                                 </form>
                                                 <cfif structKeyExists(form,'editsubmit')>
@@ -174,8 +173,7 @@
                                                     <cflocation url="view.cfm" addtoken="no">
                                                 </cfif>
                                             </div>
-                                            <div class="displayflex justifycenter align width200 margin10">
-                                                <img src="assets/account.png" class="userwidth">
+                                            <div class="displayflex justifycenter align margin10" id="editphoto">
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +182,6 @@
                             <div id="id03" class="w3-modal">
                                 <div class="w3-modal-content">
                                     <div class="w3-container">
-                                        <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <div class="displayflex lightbluebg">
                                             <div class="padding10 margin10 bgwhite">
                                                 <div class="lightbluebg displayflex justifycenter">
@@ -217,8 +214,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="displayflex justifycenter align width200 margin10">
-                                                <img src="assets/account.png" class="userwidth">
+                                            <div class="displayflex justifycenter align margin10" id="icondiv"> 
                                             </div>
                                         </div>
                                     </div>
@@ -280,7 +276,7 @@
                                             <div>
                                                 <div class="bluecolor padding10">Upload Photo*</div>
                                                 <input type="file" name="filename" id="fileid" class="outlinenone width200" onblur="validatecreateform()"><br>
-                                                <small id="fileid_error">Please fill this field!</small>
+                                                <small id="fileid_error">Please upload a photo!</small>
                                             </div>
                                         </div>
                                         <div class="padding10 bluecolor blueborder">Contact Details</div>
@@ -288,7 +284,7 @@
                                             <div>
                                                 <div class="bluecolor padding10">Address*</div>
                                                 <input type="text" name="addressname" id="addressid" placeholder="Your Address" class="outlinenone width200 borderbottom borderstyle" onblur="validatecreateform()"><br>
-                                                <small id="addressid_error">Please fill this field!</small>
+                                                <small id="addressid_error">Please enter a valid address!</small>
                                             </div>
                                             <div>
                                                 <div class="bluecolor padding10">Street*</div>   
@@ -328,8 +324,8 @@
                     </div>
                 </div>
                 <div id="print" class="displaynone">
-                    <cfset ORMReload()>
-                    <cfset datastore=EntityLoad("Contacts")> 
+                    <cfinvoke method="orminvoke" component="components/component" returnVariable="datastore">
+                    <h1>ADDRESS BOOK</h1><br>
                     <table class="border1">
                         <tr>
                             <th class="border1 padding10">PHOTO</th>
@@ -341,7 +337,7 @@
                             <tr>
                                 <td class="border1 padding10">
                                     <cfset local.photo=datastore.getPhoto()>
-                                    <img src="assets/duplicate/#local.photo#" class="icon50">
+                                    <img src="assets/duplicate/#local.photo#" class="tableicon">
                                 </td>
                                 <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                                 <td class="border1 padding10">#datastore.getEmailid()#</td>

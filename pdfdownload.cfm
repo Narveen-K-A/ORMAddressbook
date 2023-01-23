@@ -5,8 +5,8 @@
         </head>
         <body>
             <cfoutput>
-                <cfset ORMReload()>
-                <cfset datastore=EntityLoad("Contacts")>
+                <cfinvoke method="orminvoke" component="components/component" returnVariable="datastore">
+                <h1>ADDRESS BOOK</h1><br>
                 <table class="border1">
                     <tr>
                         <th class="border1 padding10">PHOTO</th>
@@ -18,7 +18,7 @@
                         <tr>
                             <td class="border1 padding10">
                                 <cfset local.photo=datastore.getPhoto()>
-                                <img src="assets/duplicate/#local.photo#" class="icon50">
+                                <img src="assets/duplicate/#local.photo#" class="tableicon">
                             </td>
                             <td class="border1 padding10">#datastore.getTitle()# #datastore.getFirstname()# #datastore.getLastname()#</td>
                             <td class="border1 padding10">#datastore.getEmailid()#</td>

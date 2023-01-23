@@ -13,6 +13,7 @@
         <cfset local.viewQuery.LASTNAME = selectQuery.LASTNAME>
         <cfset local.viewQuery.GENDER = selectQuery.GENDER>
         <cfset local.viewQuery.DATEOFBIRTH = selectQuery.DATEOFBIRTH>
+        <cfset local.viewQuery.PHOTO = selectQuery.PHOTO>
         <cfset local.viewQuery.ADDRESSOFUSER = selectQuery.ADDRESSOFUSER>
         <cfset local.viewQuery.STREET = selectQuery.STREET>
         <cfset local.viewQuery.EMAILID = selectQuery.EMAILID>   
